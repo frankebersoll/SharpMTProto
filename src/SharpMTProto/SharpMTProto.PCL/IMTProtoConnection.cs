@@ -5,62 +5,79 @@
 // --------------------------------------------------------------------------------------------------------------------
 
 using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
-using MTProtoSchema;
+using SharpMTProto.Schema.MTProto;
 
 namespace SharpMTProto
 {
-    public interface IMTProtoConnection : ITLAsyncMethods, IDisposable
+    public interface IMTProtoConnection : IDisposable, ITLAsyncMethods
     {
         IObservable<IMessage> InMessagesHistory { get; }
+
         IObservable<IMessage> OutMessagesHistory { get; }
+
         MTProtoConnectionState State { get; }
+
         bool IsConnected { get; }
+
         TimeSpan DefaultRpcTimeout { get; set; }
+
         TimeSpan DefaultConnectTimeout { get; set; }
-        void SendPlainMessage(byte[] messageData);
-        void SendMessage(IMessage message);
-        void SendEncryptedMessage(byte[] messageData, bool isContentRelated = true);
-        void SetupEncryption(byte[] authKey, ulong salt);
+
         bool IsEncryptionSupported { get; }
-        
+
         /// <summary>
-        ///     Sends plain (unencrypted) message and waits for a response.
+        /// Connect.
         /// </summary>
-        /// <typeparam name="TResponse">Type of the response which will be awaited.</typeparam>
-        /// <param name="requestMessageDataObject">Request message data.</param>
-        /// <param name="timeout">Timeout.</param>
-        /// <returns>Response.</returns>
-        /// <exception cref="TimeoutException">When response is not captured within a specified timeout.</exception>
-        Task<TResponse> SendPlainMessage<TResponse>(object requestMessageDataObject, TimeSpan timeout) where TResponse : class;
-        
+        Task<MTProtoConnectResult> Connect();
+
         /// <summary>
-        ///     Sends encrypted message and waits for a response.
+        /// Connect.
         /// </summary>
-        /// <typeparam name="TResponse">Type of the response which will be awaited.</typeparam>
-        /// <param name="requestMessageDataObject">Request message data.</param>
-        /// <param name="timeout">Timeout.</param>
-        /// <returns>Response.</returns>
-        /// <exception cref="TimeoutException">When response is not captured within a specified timeout.</exception>
-        Task<TResponse> SendEncryptedMessage<TResponse>(object requestMessageDataObject, TimeSpan timeout) where TResponse : class;
-        
+        Task<MTProtoConnectResult> Connect(CancellationToken cancellationToken);
+
         /// <summary>
         /// Diconnect.
         /// </summary>
         Task Disconnect();
 
-        /// <summary>
-        ///     Connect.
-        /// </summary>
-        Task<MTProtoConnectResult> Connect();
+        void SendEncryptedMessage(byte[] messageData, bool isContentRelated = true);
 
         /// <summary>
-        ///     Connect.
+        /// Sends encrypted message and waits for a response.
         /// </summary>
-        Task<MTProtoConnectResult> Connect(CancellationToken cancellationToken);
+        /// <typeparam name="TResponse">Type of the response which will be awaited.</typeparam>
+        /// <param name="requestMessageDataObject">Request message data.</param>
+        /// <param name="timeout">Timeout.</param>
+        /// <returns>Response.</returns>
+        /// <exception cref="TimeoutException">When response is not captured within a specified timeout.</exception>
+        Task<TResponse> SendEncryptedMessage<TResponse>(object requestMessageDataObject, TimeSpan timeout)
+            where TResponse : class;
 
-        Task<TResponse> SendMessage<TResponse>(object requestMessageDataObject, TimeSpan timeout, MessageType messageType) where TResponse : class;
+        void SendMessage(IMessage message);
+
+        Task<TResponse> SendMessage<TResponse>(
+            object requestMessageDataObject,
+            TimeSpan timeout,
+            MessageType messageType) where TResponse : class;
+
+        void SendPlainMessage(byte[] messageData);
+
+        /// <summary>
+        /// Sends plain (unencrypted) message and waits for a response.
+        /// </summary>
+        /// <typeparam name="TResponse">Type of the response which will be awaited.</typeparam>
+        /// <param name="requestMessageDataObject">Request message data.</param>
+        /// <param name="timeout">Timeout.</param>
+        /// <returns>Response.</returns>
+        /// <exception cref="TimeoutException">When response is not captured within a specified timeout.</exception>
+        Task<TResponse> SendPlainMessage<TResponse>(object requestMessageDataObject, TimeSpan timeout)
+            where TResponse : class;
+
+        void SetupEncryption(byte[] authKey, ulong salt);
     }
 
     public enum MTProtoConnectionState
