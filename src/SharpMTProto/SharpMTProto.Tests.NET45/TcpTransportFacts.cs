@@ -59,7 +59,7 @@ namespace SharpMTProto.Tests
         [Test]
         public async Task Should_connect_and_disconnect()
         {
-            TcpTransport transport = CreateTcpTransport();
+            var transport = CreateTcpTransport();
 
             transport.State.Should().Be(TransportState.Disconnected);
             transport.IsConnected.Should().BeFalse();
@@ -86,7 +86,7 @@ namespace SharpMTProto.Tests
         [Test]
         public async Task Should_process_lost_connection()
         {
-            TcpTransport transport = CreateTcpTransport();
+            var transport = CreateTcpTransport();
 
             transport.State.Should().Be(TransportState.Disconnected);
 
@@ -115,7 +115,7 @@ namespace SharpMTProto.Tests
         [Test]
         public async Task Should_receive()
         {
-            TcpTransport transport = CreateTcpTransport();
+            var transport = CreateTcpTransport();
 
             Task<byte[]> receiveTask = transport.FirstAsync().Timeout(TimeSpan.FromMilliseconds(1000)).ToTask();
 
@@ -137,7 +137,7 @@ namespace SharpMTProto.Tests
         [Test]
         public async Task Should_receive_big_payload()
         {
-            TcpTransport transport = CreateTcpTransport();
+            var transport = CreateTcpTransport();
 
             Task<byte[]> receiveTask = transport.FirstAsync().Timeout(TimeSpan.FromMilliseconds(1000)).ToTask();
 
@@ -159,7 +159,7 @@ namespace SharpMTProto.Tests
         [Test]
         public async Task Should_receive_multiple_packets()
         {
-            TcpTransport transport = CreateTcpTransport();
+            var transport = CreateTcpTransport();
 
             var receivedMessages = new AsyncProducerConsumerQueue<byte[]>();
             transport.Subscribe(receivedMessages.Enqueue);
@@ -204,7 +204,7 @@ namespace SharpMTProto.Tests
         [Test]
         public async Task Should_receive_small_parts_less_than_4_bytes()
         {
-            TcpTransport transport = CreateTcpTransport();
+            var transport = CreateTcpTransport();
 
             Task<byte[]> receiveTask = transport.FirstAsync().Timeout(TimeSpan.FromMilliseconds(3000)).ToTask();
 
@@ -238,7 +238,7 @@ namespace SharpMTProto.Tests
         [Test]
         public async Task Should_send()
         {
-            TcpTransport transport = CreateTcpTransport();
+            var transport = CreateTcpTransport();
 
             await transport.ConnectAsync();
             

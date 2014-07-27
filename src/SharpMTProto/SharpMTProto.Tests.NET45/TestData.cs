@@ -6,6 +6,7 @@
 
 using System;
 using BigMath.Utils;
+using SharpMTProto.Authentication;
 using SharpMTProto.Services;
 using SharpTL;
 
@@ -97,17 +98,6 @@ namespace SharpMTProto.Tests
                 .HexToBytes();
 
         public static readonly UInt64 InitialSalt = (0xA5CF4D33F4A11EA8 ^ 0x311C85DB234AA264).ToBytes().ToUInt64(asLittleEndian: false);
-    }
-
-    public class TestMessageIdsGenerator : IMessageIdGenerator
-    {
-        private static readonly ulong[] MessageIds = {0x51e57ac42770964aUL, 0x51e57ac917717a27UL, 0x51e57acd2aa32c6dUL};
-        private int _mi;
-
-        public ulong GetNextMessageId()
-        {
-            return MessageIds[_mi++];
-        }
     }
 
     public class TestNonceGenerator : INonceGenerator, IDisposable

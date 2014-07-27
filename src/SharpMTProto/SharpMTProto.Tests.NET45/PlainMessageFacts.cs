@@ -8,6 +8,7 @@ using System.Linq;
 using BigMath.Utils;
 using FluentAssertions;
 using NUnit.Framework;
+using SharpMTProto.Messaging;
 
 namespace SharpMTProto.Tests
 {

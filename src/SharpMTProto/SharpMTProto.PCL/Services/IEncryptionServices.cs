@@ -4,20 +4,10 @@
 // </copyright>
 // --------------------------------------------------------------------------------------------------------------------
 
+using SharpMTProto.Authentication;
+
 namespace SharpMTProto.Services
 {
-    public class DHOutParams
-    {
-        public DHOutParams(byte[] gb, byte[] s)
-        {
-            GB = gb;
-            S = s;
-        }
-
-        public byte[] GB { get; set; }
-        public byte[] S { get; set; }
-    }
-
     public interface IEncryptionServices
     {
         byte[] RSAEncrypt(byte[] data, PublicKey publicKey);

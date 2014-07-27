@@ -9,14 +9,6 @@ using SharpMTProto.Utils;
 namespace SharpMTProto.Services
 {
     /// <summary>
-    ///     Interface for a message ID generator.
-    /// </summary>
-    public interface IMessageIdGenerator
-    {
-        ulong GetNextMessageId();
-    }
-
-    /// <summary>
     ///     The default MTProto message ID generator.
     /// </summary>
     public class MessageIdGenerator : IMessageIdGenerator

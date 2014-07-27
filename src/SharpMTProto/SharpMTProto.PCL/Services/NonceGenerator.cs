@@ -8,11 +8,6 @@ using System;
 
 namespace SharpMTProto.Services
 {
-    public interface INonceGenerator
-    {
-        byte[] GetNonce(uint length);
-    }
-
     public class NonceGenerator : INonceGenerator
     {
         private readonly Random _random;

@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 
 #pragma warning disable 1591
 // ReSharper disable UnusedMember.Global
@@ -9,7 +11,7 @@
 // ReSharper disable MemberCanBeProtected.Global
 // ReSharper disable InconsistentNaming
 
-namespace SharpMTProto.Annotations
+namespace SharpMTProto.Properties
 {
   /// <summary>
   /// Indicates that the value of the marked element could be <c>null</c> sometimes,
@@ -64,7 +66,7 @@ namespace SharpMTProto.Annotations
     /// </param>
     public StringFormatMethodAttribute(string formatParameterName)
     {
-      FormatParameterName = formatParameterName;
+      this.FormatParameterName = formatParameterName;
     }
 
     public string FormatParameterName { get; private set; }
@@ -126,7 +128,7 @@ namespace SharpMTProto.Annotations
     public NotifyPropertyChangedInvocatorAttribute() { }
     public NotifyPropertyChangedInvocatorAttribute(string parameterName)
     {
-      ParameterName = parameterName;
+      this.ParameterName = parameterName;
     }
 
     public string ParameterName { get; private set; }
@@ -182,8 +184,8 @@ namespace SharpMTProto.Annotations
 
     public ContractAnnotationAttribute([NotNull] string contract, bool forceFullStates)
     {
-      Contract = contract;
-      ForceFullStates = forceFullStates;
+      this.Contract = contract;
+      this.ForceFullStates = forceFullStates;
     }
 
     public string Contract { get; private set; }
@@ -205,7 +207,7 @@ namespace SharpMTProto.Annotations
     public LocalizationRequiredAttribute() : this(true) { }
     public LocalizationRequiredAttribute(bool required)
     {
-      Required = required;
+      this.Required = required;
     }
 
     public bool Required { get; private set; }
@@ -251,7 +253,7 @@ namespace SharpMTProto.Annotations
   {
     public BaseTypeRequiredAttribute([NotNull] Type baseType)
     {
-      BaseType = baseType;
+      this.BaseType = baseType;
     }
 
     [NotNull] public Type BaseType { get; private set; }
@@ -277,8 +279,8 @@ namespace SharpMTProto.Annotations
     public UsedImplicitlyAttribute(
       ImplicitUseKindFlags useKindFlags, ImplicitUseTargetFlags targetFlags)
     {
-      UseKindFlags = useKindFlags;
-      TargetFlags = targetFlags;
+      this.UseKindFlags = useKindFlags;
+      this.TargetFlags = targetFlags;
     }
 
     public ImplicitUseKindFlags UseKindFlags { get; private set; }
@@ -305,8 +307,8 @@ namespace SharpMTProto.Annotations
     public MeansImplicitUseAttribute(
       ImplicitUseKindFlags useKindFlags, ImplicitUseTargetFlags targetFlags)
     {
-      UseKindFlags = useKindFlags;
-      TargetFlags = targetFlags;
+      this.UseKindFlags = useKindFlags;
+      this.TargetFlags = targetFlags;
     }
 
     [UsedImplicitly] public ImplicitUseKindFlags UseKindFlags { get; private set; }
@@ -356,7 +358,7 @@ namespace SharpMTProto.Annotations
     public PublicAPIAttribute() { }
     public PublicAPIAttribute([NotNull] string comment)
     {
-      Comment = comment;
+      this.Comment = comment;
     }
 
     [NotNull] public string Comment { get; private set; }
@@ -397,7 +399,7 @@ namespace SharpMTProto.Annotations
     public PathReferenceAttribute() { }
     public PathReferenceAttribute([PathReference] string basePath)
     {
-      BasePath = basePath;
+      this.BasePath = basePath;
     }
 
     [NotNull] public string BasePath { get; private set; }
@@ -453,7 +455,7 @@ namespace SharpMTProto.Annotations
     public AspMvcActionAttribute() { }
     public AspMvcActionAttribute([NotNull] string anonymousProperty)
     {
-      AnonymousProperty = anonymousProperty;
+      this.AnonymousProperty = anonymousProperty;
     }
 
     [NotNull] public string AnonymousProperty { get; private set; }
@@ -470,7 +472,7 @@ namespace SharpMTProto.Annotations
     public AspMvcAreaAttribute() { }
     public AspMvcAreaAttribute([NotNull] string anonymousProperty)
     {
-      AnonymousProperty = anonymousProperty;
+      this.AnonymousProperty = anonymousProperty;
     }
 
     [NotNull] public string AnonymousProperty { get; private set; }
@@ -489,7 +491,7 @@ namespace SharpMTProto.Annotations
     public AspMvcControllerAttribute() { }
     public AspMvcControllerAttribute([NotNull] string anonymousProperty)
     {
-      AnonymousProperty = anonymousProperty;
+      this.AnonymousProperty = anonymousProperty;
     }
 
     [NotNull] public string AnonymousProperty { get; private set; }
@@ -583,7 +585,7 @@ namespace SharpMTProto.Annotations
     public HtmlElementAttributesAttribute() { }
     public HtmlElementAttributesAttribute([NotNull] string name)
     {
-      Name = name;
+      this.Name = name;
     }
 
     [NotNull] public string Name { get; private set; }
@@ -596,7 +598,7 @@ namespace SharpMTProto.Annotations
   {
     public HtmlAttributeValueAttribute([NotNull] string name)
     {
-      Name = name;
+      this.Name = name;
     }
 
     [NotNull] public string Name { get; private set; }

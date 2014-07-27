@@ -4,13 +4,29 @@
 // </copyright>
 // --------------------------------------------------------------------------------------------------------------------
 
+using System.Text;
 using BigMath.Utils;
 using FluentAssertions;
 using NUnit.Framework;
+using SharpMTProto.Authentication;
+using SharpMTProto.Messaging;
 using SharpMTProto.Services;
 
 namespace SharpMTProto.Tests
 {
+    [TestFixture]
+    public class HashServiceFacts
+    {
+        [Test]
+        public void Should_generate_SHA1_for_bytes()
+        {
+            var s = new HashServices();
+            var bytes = Encoding.ASCII.GetBytes("TEST TEST TEST TEST TEST TEST TEST TEST");
+            var hash = s.ComputeSHA1(bytes);
+            hash.ShouldBeEquivalentTo(new byte[]{0x69,0x92,0x20,0x5a,0xea,0x89,0x0e,0xfb,0xf4,0x9a,0x33,0x05,0x3a,0x16,0x55,0xd7,0x4e,0xd5,0x87,0x37});
+        }
+    }
+
     [TestFixture]
     public class EncryptionServicesFacts
     {

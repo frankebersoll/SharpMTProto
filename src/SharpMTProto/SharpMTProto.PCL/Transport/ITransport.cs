@@ -10,12 +10,6 @@ using System.Threading.Tasks;
 
 namespace SharpMTProto.Transport
 {
-    public enum TransportState
-    {
-        Disconnected = 0,
-        Connected = 1
-    }
-
     public interface ITransport : IObservable<byte[]>, IDisposable
     {
         bool IsConnected { get; }

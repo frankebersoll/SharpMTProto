@@ -7,11 +7,6 @@ namespace SharpMTProto.Transport
 {
     public interface ITransportConfigProvider
     {
-        TransportConfig DefaultTransportConfig { get; }
-    }
-
-    public class TransportConfigProvider : ITransportConfigProvider
-    {
-        public TransportConfig DefaultTransportConfig { get; set; }
+        TransportConfig DefaultTransportConfig { get; set; }
     }
 }
